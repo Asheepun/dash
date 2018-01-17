@@ -2,7 +2,7 @@ import keyBinder         from "/js/keyBinder.js";
 import vec               from "/js/vector.js";
 import createCanvas      from "/js/canvas.js";
 import player            from "/js/player.js";
-import enemy             from "/js/enemy.js";
+import enemy, * as e     from "/js/enemy.js";
 import gameWorld         from "/js/gameWorld.js";
 import { playerDashBar } from "/js/hud.js";
 
@@ -17,9 +17,9 @@ Promise.all([
 
     //create world
     for(let i = 0; i < 3; i++){
-        GAME.world.add(enemy(vec(100 + i*200, 100)), "enemies", 1);
+        GAME.world.add(e.punk(vec(Math.random()*900, Math.random()*600)), "enemies", 1);
     }
-    GAME.world.add(player(vec(300, 300)), "player", 2, true);
+    GAME.world.add(player(vec(450, 500)), "player", 2, true);
     GAME.world.add(playerDashBar(), "hud", 5);
 
     const keys = keyBinder();

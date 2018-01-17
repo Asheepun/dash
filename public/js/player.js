@@ -44,7 +44,7 @@ const player = (pos) => {
         if(pointer.pressed && that.dashCooldown <= 0 && that.dashed <= 0){
             that.dashCooldown = 60;
             that.dashed = 8;
-            that.dashDir = pointer.pos.copy();
+            that.dashDir = v.getDir(v.sub(that.center, pointer.pos.copy()), 10);
             that.canMove = false;
         }
         if(that.dashCooldown > 0){
@@ -58,12 +58,7 @@ const player = (pos) => {
         if(that.dashed > 0){
             that.dashing = true;
             that.dashed--;
-            that.pos.add(v.pipe(
-                v.sub(that.center, that.dashDir),
-                v.normalize,
-                v.reverse,
-                x => v.mul(x, 10),
-            ));
+            that.pos.add(that.dashDir);
         }else{
             that.dashing = false;
         }

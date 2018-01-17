@@ -59,28 +59,6 @@ const vec = (x = 0, y = 0) => {
     return that;
 }
 
-vec.add = (vec1, vec2) => vec(vec1.x+vec2.x, vec1.y+vec2.y); 
-
-vec.sub = (vec1, vec2) => vec(vec1.x-vec2.x, vec1.y-vec2.y); 
-
-vec.div = (v, x) => vec(v.x/x, v.y/x); 
-
-vec.mul = (v, x) => vec(v.x*x, v.y*x);
-
-vec.dub = (v) => mul(v, 2);
-
-vec.half = (v) => div(v, 2);
-
-vec.reverse = (v) => vec(-v.x, -v.y);
-
-vec.normalize = (v) => div(v, v.mag);
-
-vec.abs = (v) => vec(Math.abs(v.x), Math.abs(v.y));
-
-vec.floor = (v) => vec(Math.floor(v.x), Math.floor(v.y)); 
-
-vec.round = (v) => vec(Math.round(v.x), Math.round(v.y)); 
-
 export const add = (vec1, vec2) => vec(vec1.x+vec2.x, vec1.y+vec2.y); 
 
 export const sub = (vec1, vec2) => vec(vec1.x-vec2.x, vec1.y-vec2.y); 
@@ -111,6 +89,13 @@ export const align = (cord, scl) => {
 export const angle = (vec1, vec2) => -Math.atan2(vec1.x - vec2.x, vec1.y - vec2.y);
 
 export const pipe = (x, ...funcs) => funcs.reduce((x, func) => func(x), x);
+
+export const getDir = (vec, dist = 1) => pipe(
+    vec,
+    normalize,
+    reverse,
+    x => mul(x, dist),
+);
 
 
 export default vec;
